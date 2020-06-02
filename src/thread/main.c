@@ -33,13 +33,26 @@
  * @brief Launches a benchmark.
  */
 
-
+void *PrintHello() {
+	kthread_t tid = kthread_self();
+	uprintf("Thread %d: Hello!", tid);
+	kthread_exit(NULL);
+	return 0;
+}
 int __main3(int argc, const char *argv[])
 {	
 	((void) argc);
 	((void) argv);
 	
-	uprintf("Hello World!");
+	int i, j;
+	kthread_t threa[5];
+	
+	for (i = 0; i < 5; i++) {
+		kthread_create(&threa[i], PrintHello, NULL);
+	}
+	for (j = 0; j < 5; j++) { 
+		kthread_join(threa[i], NULL);
+	}
 	return (0);
 
 }

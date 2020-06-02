@@ -14,7 +14,7 @@ to write/port your application to our operating system.  Overall, the
 following examples are featured.
 
 - `hello-world`: says hello to the world
-
+- `thread`: threads saying hello
 License & Maintainers
 ---------------------
 
