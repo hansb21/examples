@@ -24,7 +24,7 @@
 
 #include <nanvix/runtime/runtime.h>
 #include <nanvix/ulib.h>
-#include <nanvix/sys/thread.h>
+
 /*============================================================================*
  * Benchmark Driver                                                           *
  *============================================================================*/
@@ -32,14 +32,12 @@
 /**
  * @brief Launches a benchmark.
  */
-
-
 int __main3(int argc, const char *argv[])
-{	
+{
 	((void) argc);
 	((void) argv);
-	
-	uprintf("Hello World!");
-	return (0);
 
+	uprintf("hello world!");
+
+	return (0);
 }
