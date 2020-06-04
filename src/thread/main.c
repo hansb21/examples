@@ -45,12 +45,12 @@ int __main3(int argc, const char *argv[])
 	((void) argv);
 	
 	int i, j;
-	kthread_t threa[5];
+	kthread_t threa[THREAD_MAX - 1];
 	
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < THREAD_MAX-1; i++) {
 		kthread_create(&threa[i], PrintHello, NULL);
 	}
-	for (j = 0; j < 5; j++) { 
+	for (j = 0; j < THREAD_MAX-1; j++) { 
 		kthread_join(threa[i], NULL);
 	}
 	return (0);
