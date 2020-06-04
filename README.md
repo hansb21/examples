@@ -15,7 +15,7 @@ following examples are featured.
 
 - `hello-world`: says hello to the world
 - `thread`: threads saying hello
-
+- `global-variable`: use of threads and semaphores to increment a global variable
 License & Maintainers
 ---------------------
 
