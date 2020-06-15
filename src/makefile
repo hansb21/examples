@@ -23,11 +23,12 @@
 #
 
 # Builds everything.
-all: all-hello all-thread all-globalval
+all: all-hello all-thread all-globalval all-procon
 # Cleans up build objects.
-clean: clean-hello clean-thread
+clean: clean-hello clean-thread clean-globalval clean-procon
 # Cleans up everything.
-distclean: distclean-hello disclean-`thread
+distclean: distclean-hello disclean-thread disclean-globalval disclean-procon
+
 #===============================================================================
 # Hello World
 #===============================================================================
@@ -64,3 +65,15 @@ clean-globalval:
 # Cleans up everything.
 distclean-globalval:
 	$(MAKE) -C globalval distclean
+#===============================================================================
+# Producer Consumer Problem
+#===============================================================================
+# Builds the app.
+all-procon:
+	$(MAKE) -C Producer-Consumer all
+# Cleans up build objects.
+clean-procon:
+	$(MAKE) -C Producer-Consumer clean
+# Cleans up everything.
+distclean-procon:
+	$(MAKE) -C Producer-Consumer distclean
