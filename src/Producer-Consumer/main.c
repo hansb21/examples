@@ -56,7 +56,8 @@ void* producer(void * args) {
 
 		int valeu = ((*_tid) * times++);		
 		f = (f+1) % SIZE;
-
+		uprintf("%d: %d", value, f);
+		uprintf("%s", buffer);
 		if (valeu < 1000) {
 			buffer[f] = value;
 		//buffer[f] = 1;
