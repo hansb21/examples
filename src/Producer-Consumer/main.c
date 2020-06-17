@@ -58,6 +58,7 @@ void* producer(void * args)
 		nanvix_semaphore_up(&lock_prod);
 		nanvix_semaphore_up(&cheio);
 	}
+	kthread_exit(NULL);
 	return 0;
 }
 
