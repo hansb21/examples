@@ -44,33 +44,30 @@ struct nanvix_semaphore cheio, vazio, lock_prod, lock_cons;
 
 int f, i = 0;
 
-void* producer(void * args) {
-	
-		int * _tid = (int *) args;
-		int times = 1;
-
-	for (int value = ((*_tid) * 1000); value < ((*_tid + 1) * 1000); value++){
-
+void* producer(void * args)
+{
+	int tid = *((int *) args);
+	uprintf("Produtor %d criado", tid);
+	for (int value = (tid * 1000); value < ((tid + 1) * 1000); value++)
+	{
 		nanvix_semaphore_down(&vazio);
 		nanvix_semaphore_down(&lock_prod);
-
-		int valeu = ((*_tid) * times++);		
 		f = (f+1) % SIZE;
-		uprintf("%d: %d", value, f);
-		uprintf("%s", buffer);
-		if (valeu < 1000) {
-			buffer[f] = value;
-		//buffer[f] = 1;
+		buffer[f] = value;
 		uprintf("produzi no indice %d: %d", f, value);
-		}
 		nanvix_semaphore_up(&lock_prod);
 		nanvix_semaphore_up(&cheio);
 	}
-	kthread_exit(NULL);
 	return 0;
 }
-void* consumer() {
+
+
+void* consumer(void * args) {
 	
+	int tid = *((int *) args);
+
+	uprintf("Consumidor %d criado", tid);
+	 
 	for (int amount = 0; amount < 1000; amount++) {
 		nanvix_semaphore_down(&cheio);
 		nanvix_semaphore_down(&lock_cons);
@@ -100,8 +97,8 @@ int __main3(int argc, const char *argv[]) {
 	kthread_t tid[THREAD_MAX - 1];
 	int virtual_tid[THREAD_MAX - 1];
 
-	int cons = (THREAD_MAX-1)/2;
-	int prod = (THREAD_MAX-1)/2;
+	int cons = NCONSUMERS;
+	int prod = NPRODUCERS;
 	int n, d = 0;
 
 	for (; n < NCONSUMERS; ++n) {
@@ -115,6 +112,7 @@ int __main3(int argc, const char *argv[]) {
 	for (d = 0; i <cons+prod; ++d) {
 		kthread_join(tid[d], NULL);	
 }
+	//kthread_exit(NULL);
 	return (0);
 
 }
